@@ -2,6 +2,8 @@ const sqlite3 = require('sqlite3');
 
 const db = new sqlite3.Database('./database.sqlite');
 
+
+db.serialize(()=>{
 db.run(`DROP TABLE IF EXISTS Artist`, (error)=> {
     if (error) {
         console.log('Something went wrong dropping the table')
@@ -19,3 +21,4 @@ db.run(`CREATE TABLE Artist (id INTEGER PRIMARY KEY NOT NULL,
                 console.log('Table has been created!')
             }
         })
+    });
